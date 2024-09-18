@@ -1922,10 +1922,8 @@ async function getAddressescsv(tls) {
         const columns = lines[i].split(",");
         const speedIndex = columns.length - 1; // 最后一个字段
         // 检查TLS是否为"TRUE"且速度大于DLS
-        if (
-          columns[tlsIndex].toUpperCase() === tls &&
-          parseFloat(columns[speedIndex]) > DLS
-        ) {
+        const speed = Number(columns[speedIndex].match(/\d+/g).join(""));
+        if (columns[tlsIndex].toUpperCase() === tls && speed > DLS) {
           const ipAddress = columns[ipAddressIndex];
           const port = columns[portIndex];
           const dataCenter = columns[dataCenterIndex];
