@@ -1909,6 +1909,8 @@ async function getAddressescsv(tls) {
       const ipAddressIndex = 0; // IP地址在 CSV 头部的位置
       const portIndex = 1; // 端口在 CSV 头部的位置
       const dataCenterIndex = tlsIndex + 1; // 数据中心是 TLS 的后一个字段
+      const areaIndex = dataCenterIndex + 1;
+      const cityIndex = areaIndex + 1;
 
       if (tlsIndex === -1) {
         console.error("CSV文件缺少必需的字段");
@@ -1927,9 +1929,12 @@ async function getAddressescsv(tls) {
           const ipAddress = columns[ipAddressIndex];
           const port = columns[portIndex];
           const dataCenter = columns[dataCenterIndex];
+          const area = columns[areaIndex];
+          const city = columns[cityIndex];
+          const speed = columns[speedIndex];
           //只添加亚洲的地址
-          if (dataCenter.includes("Asia")) {
-            const formattedAddress = `${ipAddress}:${port}#${dataCenter}`;
+          if (area.includes("Asia")) {
+            const formattedAddress = `${ipAddress}:${port}#${dataCenter}-${city}-${speed}`;
             newAddressescsv.push(formattedAddress);
           }
         }
