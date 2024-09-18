@@ -1929,8 +1929,8 @@ async function getAddressescsv(tls) {
           const dataCenter = columns[dataCenterIndex];
           const area = columns[areaIndex];
           const city = columns[cityIndex];
-          const speed = columns[speedIndex];
-          const formattedAddress = `${ipAddress}:${port}#${dataCenter}-${city}-${speed}`;
+          const speedInfo = columns[speedIndex];
+          const formattedAddress = `${ipAddress}:${port}#${area}-${city}-${speedInfo}`;
           newAddressescsv.push(formattedAddress);
         }
       }
