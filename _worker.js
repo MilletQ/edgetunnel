@@ -1932,11 +1932,8 @@ async function getAddressescsv(tls) {
           const area = columns[areaIndex];
           const city = columns[cityIndex];
           const speed = columns[speedIndex];
-          //只添加亚洲的地址
-          if (area.includes("Asia")) {
-            const formattedAddress = `${ipAddress}:${port}#${dataCenter}-${city}-${speed}`;
-            newAddressescsv.push(formattedAddress);
-          }
+          const formattedAddress = `${ipAddress}:${port}#${dataCenter}-${city}-${speed}`;
+          newAddressescsv.push(formattedAddress);
         }
       }
     } catch (error) {
