@@ -1927,9 +1927,8 @@ async function getAddressescsv(tls) {
           const ipAddress = columns[ipAddressIndex];
           const port = columns[portIndex];
           const dataCenter = columns[dataCenterIndex];
-          const area = columns[areaIndex];
-          const city = columns[cityIndex];
-          const formattedAddress = `${ipAddress}:${port}#${city}-${speed}`;
+          const country = getCountry(dataCenter);
+          const formattedAddress = `${ipAddress}:${port}#${country}-${speed}`;
           newAddressescsv.push(formattedAddress);
         }
       }
@@ -1940,6 +1939,235 @@ async function getAddressescsv(tls) {
   }
 
   return newAddressescsv;
+}
+
+function getCountry(dataCenter) {
+  let country = "未知地区"; // Define the country variable
+
+  switch (dataCenter) {
+    case "ICN":
+    case "KIX":
+    case "NRT":
+    case "FUK":
+      country = "日本";
+      break;
+    case "ORD":
+    case "SJC":
+    case "IAD":
+    case "EWR":
+    case "SEA":
+    case "YYZ":
+    case "DFW":
+    case "PDX":
+    case "ATL":
+    case "MIA":
+    case "BUF":
+    case "MCI":
+    case "PHX":
+    case "BOS":
+    case "IAH":
+    case "SLC":
+    case "DEN":
+    case "JAX":
+    case "PHL":
+    case "BNA":
+    case "SMF":
+    case "LAS":
+    case "MSP":
+    case "HNL":
+      country = "美国";
+      break;
+    case "FRA":
+    case "DUS":
+    case "HAM":
+    case "MUC":
+      country = "德国";
+      break;
+    case "SIN":
+      country = "新加坡";
+      break;
+    case "AMS":
+      country = "荷兰";
+      break;
+    case "HKG":
+      country = "香港";
+      break;
+    case "CDG":
+    case "MRS":
+      country = "法国";
+      break;
+    case "LHR":
+    case "MAN":
+      country = "英国";
+      break;
+    case "ARN":
+      country = "瑞典";
+      break;
+    case "HEL":
+      country = "芬兰";
+      break;
+    case "BLR":
+    case "BOM":
+    case "MAA":
+    case "HYD":
+      country = "印度";
+      break;
+    case "IST":
+      country = "土耳其";
+      break;
+    case "WAW":
+      country = "波兰";
+      break;
+    case "VIE":
+      country = "奥地利";
+      break;
+    case "DME":
+    case "LED":
+    case "KLD":
+      country = "俄罗斯";
+      break;
+    case "MAD":
+    case "BCN":
+      country = "西班牙";
+      break;
+    case "TPE":
+    case "KHH":
+      country = "台湾";
+      break;
+    case "SYD":
+    case "MEL":
+    case "ADL":
+    case "BNE":
+      country = "澳大利亚";
+      break;
+    case "CPH":
+      country = "丹麦";
+      break;
+    case "KBP":
+      country = "乌克兰";
+      break;
+    case "DUB":
+    case "ORK":
+      country = "爱尔兰";
+      break;
+    case "MXP":
+    case "FCO":
+    case "PMO":
+      country = "意大利";
+      break;
+    case "PRG":
+      country = "捷克";
+      break;
+    case "TLL":
+      country = "爱沙尼亚";
+      break;
+    case "RIX":
+      country = "拉脱维亚";
+      break;
+    case "OSL":
+      country = "挪威";
+      break;
+    case "SOF":
+      country = "保加利亚";
+      break;
+    case "VNO":
+      country = "立陶宛";
+      break;
+    case "BUD":
+      country = "匈牙利";
+      break;
+    case "ZRH":
+      country = "瑞士";
+      break;
+    case "DXB":
+      country = "阿联酋";
+      break;
+    case "RUH":
+      country = "沙特";
+      break;
+    case "QRO":
+      country = "墨西哥";
+      break;
+    case "KUL":
+      country = "马来西亚";
+      break;
+    case "GRU":
+    case "GIG":
+      country = "巴西";
+      break;
+    case "TLV":
+    case "HFA":
+      country = "以色列";
+      break;
+    case "SDQ":
+      country = "多米尼加";
+      break;
+    case "SCL":
+      country = "智利";
+      break;
+    case "JNB":
+    case "CPT":
+    case "DUR":
+      country = "南非";
+      break;
+    case "ALA":
+      country = "哈萨克斯坦";
+      break;
+    case "KEF":
+      country = "冰岛";
+      break;
+    case "LIS":
+      country = "葡萄牙";
+      break;
+    case "LUX":
+      country = "卢森堡";
+      break;
+    case "YVR":
+    case "YUL":
+      country = "加拿大";
+      break;
+    case "GYD":
+      country = "阿塞拜疆";
+      break;
+    case "EVN":
+      country = "亚美尼亚";
+      break;
+    case "DAC":
+      country = "孟加拉";
+      break;
+    case "BAH":
+      country = "巴林";
+      break;
+    case "EZE":
+      country = "阿根廷";
+      break;
+    case "MCT":
+      country = "阿曼";
+      break;
+    case "KWI":
+      country = "科威特";
+      break;
+    case "ASU":
+      country = "巴拉圭";
+      break;
+    case "ATH":
+      country = "希腊";
+      break;
+    case "ZAG":
+      country = "克罗地亚";
+      break;
+    case "MDE":
+      country = "哥伦比亚";
+      break;
+    case "ALG":
+    case "ORN":
+      country = "阿尔及利亚";
+      break;
+    case "MNL":
+      country = "菲律宾";
+      break;
+  }
+  return country;
 }
 
 function subAddresses(
