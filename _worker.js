@@ -1975,6 +1975,7 @@ function getCountry(dataCenter) {
     case "LAS":
     case "MSP":
     case "HNL":
+    case "LAX":
       country = "美国";
       break;
     case "FRA":
