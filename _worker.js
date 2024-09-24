@@ -1921,15 +1921,30 @@ async function getAddressescsv(tls) {
       for (let i = 1; i < lines.length; i++) {
         const columns = lines[i].split(",");
         const speedIndex = columns.length - 1; // 最后一个字段
+        //速度转换
+        let speed = Number(columns[speedIndex].match(/\d+/g).join(""));
+        if (columns[speedIndex].includes("kb/s")) {
+          speed = (
+            Number(columns[speedIndex].match(/\d+/g).join("")) / 1000
+          ).toFixed(2);
+        }
         // 检查TLS是否为"TRUE"且速度大于DLS
-        const speed = Number(columns[speedIndex].match(/\d+/g).join(""));
         if (columns[tlsIndex].toUpperCase() === tls && speed > DLS) {
           const ipAddress = columns[ipAddressIndex];
           const port = columns[portIndex];
           const dataCenter = columns[dataCenterIndex];
           const country = getCountry(dataCenter);
-          const formattedAddress = `${ipAddress}:${port}#${country}-${speed}`;
-          newAddressescsv.push(formattedAddress);
+          if (
+            country === "香港" ||
+            country === "日本" ||
+            country === "新加坡" ||
+            country === "韩国" ||
+            country === "美国" ||
+            country === "台湾"
+          ) {
+            const formattedAddress = `${ipAddress}:${port}#${country}-${speed}`;
+            newAddressescsv.push(formattedAddress);
+          }
         }
       }
     } catch (error) {
@@ -1945,11 +1960,13 @@ function getCountry(dataCenter) {
   let country = "未知地区"; // Define the country variable
 
   switch (dataCenter) {
-    case "ICN":
     case "KIX":
     case "NRT":
     case "FUK":
       country = "日本";
+      break;
+    case "ICN":
+      country = "韩国";
       break;
     case "ORD":
     case "SJC":
