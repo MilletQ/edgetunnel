@@ -1941,7 +1941,7 @@ async function getAddressescsv(tls) {
             country === "美国" ||
             country === "台湾"
           ) {
-            const formattedAddress = `${ipAddress}:${port}#${country}-${speed}`;
+            const formattedAddress = `${ipAddress}:${port}#${country}-${speed}MB/s`;
             newAddressescsv.push(formattedAddress);
           }
         }
