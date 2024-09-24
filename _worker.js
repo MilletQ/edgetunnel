@@ -1922,7 +1922,8 @@ async function getAddressescsv(tls) {
         const columns = lines[i].split(",");
         const speedIndex = columns.length - 1; // 最后一个字段
         //速度转换
-        let speed = Number(columns[speedIndex].match(/\d+/g).join(""));
+        const matches = columns[speedIndex].match(/(\d+(\.\d+)?|\d+)/g); //提取数字部分
+        let speed = parseFloat(matches[0]);
         if (columns[speedIndex].includes("kB/s")) {
           speed = (speed / 1000).toFixed(2);
         }
