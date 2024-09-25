@@ -1920,8 +1920,14 @@ async function getAddressescsv(tls) {
       // 从第二行开始遍历CSV行
       for (let i = 1; i < lines.length; i++) {
         const columns = lines[i].split(",");
-        const speedIndex = columns.length - 1; // 最后一个字段
+        //判断ip端口是否存在
+        const ipAddress = columns[ipAddressIndex];
+        const port = columns[portIndex];
+        if (newAddressescsv.some((x) => x.includes(`${ipAddress}:${port}`))) {
+          continue;
+        }
         //速度转换
+        const speedIndex = columns.length - 1; // 最后一个字段
         const matches = columns[speedIndex].match(/(\d+(\.\d+)?|\d+)/g); //提取数字部分
         let speed = parseFloat(matches[0]);
         if (columns[speedIndex].includes("kB/s")) {
@@ -1929,8 +1935,6 @@ async function getAddressescsv(tls) {
         }
         // 检查TLS是否为"TRUE"且速度大于DLS
         if (columns[tlsIndex].toUpperCase() === tls && speed > DLS) {
-          const ipAddress = columns[ipAddressIndex];
-          const port = columns[portIndex];
           const dataCenter = columns[dataCenterIndex];
           const country = getCountry(dataCenter);
           if (
