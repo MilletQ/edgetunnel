@@ -180,6 +180,7 @@ export default {
               url
             );
             return new Response(`${fakeConfig}`, { status: 200 });
+          case `/clash`:
           case `/${userID}`: {
             await sendMessage(
               `#获取订阅 ${FileName}`,
